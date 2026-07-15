@@ -169,22 +169,67 @@ namespace Practic_cs
             Console.WriteLine("1 - Tip Percentage");
             Console.WriteLine("2 - Tip Amount");
             Console.WriteLine("3 - No Tip");
-            Console.Write("Enter Tip Method: ");
-            string tipMethod = Console.ReadLine();
+
+            string tipMethod = "";
+            while (true)
+            {
+                Console.Write("Enter Tip Method (1-3): ");
+                tipMethod = Console.ReadLine();
+
+                if (tipMethod == "1" || tipMethod == "2" || tipMethod == "3")
+                {
+                    break;
+                }
+
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Error: Invalid choice. Please enter 1, 2, or 3.");
+                Console.ResetColor();
+            }
 
             if (tipMethod == "1")
             {
-                Console.Write("Enter tip percentage: ");
-                _manager.SetTipPercentage(Console.ReadLine());
+                while (true)
+                {
+                    Console.Write("Enter tip percentage: ");
+                    string result = _manager.SetTipPercentage(Console.ReadLine());
+
+                    if (result.StartsWith("Error"))
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine(result);
+                        Console.ResetColor();
+                    }
+                    else
+                    {
+                        Console.WriteLine(result);
+                        break;
+                    }
+                }
             }
             else if (tipMethod == "2")
             {
-                Console.Write("Enter Tip amount: ");
-                _manager.SetTipAmount(Console.ReadLine());
+                while (true)
+                {
+                    Console.Write("Enter Tip amount: ");
+                    string result = _manager.SetTipAmount(Console.ReadLine());
+
+                    if (result.StartsWith("Error"))
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine(result);
+                        Console.ResetColor();
+                    }
+                    else
+                    {
+                        Console.WriteLine(result);
+                        break;
+                    }
+                }
             }
             else if (tipMethod == "3")
             {
                 _manager.ClearTip();
+                Console.WriteLine("Tip cleared successfully.");
             }
         }
 
